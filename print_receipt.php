@@ -25,6 +25,30 @@ if ($result->num_rows == 0) {
 }
 $row = $result->fetch_assoc();
 
+// 2.5 Fetch Group Members (if source is group)
+$group_members = [];
+$is_group_view = false;
+
+if ($source === 'group' && !empty($row['payment_proof'])) {
+    $proof = $row['payment_proof'];
+    $sql_group = "SELECT * FROM group_participants WHERE payment_proof = ? ORDER BY id ASC";
+    $stmt_group = $conn->prepare($sql_group);
+    $stmt_group->bind_param("s", $proof);
+    $stmt_group->execute();
+    $result_group = $stmt_group->get_result();
+    
+    if ($result_group->num_rows > 1) {
+        $is_group_view = true;
+        while ($m = $result_group->fetch_assoc()) {
+            $group_members[] = $m;
+        }
+    } else {
+        $group_members[] = $row;
+    }
+} else {
+    $group_members[] = $row;
+}
+
 // 3. Setup Dompdf
 $options = new Options();
 $options->set('isHtml5ParserEnabled', true);
@@ -36,6 +60,76 @@ $dompdf = new Dompdf($options);
 $logoPath = 'img/logo.jpg';
 $logoData = base64_encode(file_get_contents($logoPath));
 $logoSrc = 'data:image/jpeg;base64,' . $logoData;
+
+// Prepare Participant Details Section
+$participant_content = '';
+
+if ($is_group_view) {
+    // GROUP VIEW HTML
+    $receipt_title = "RESIT PENDAFTARAN BERKUMPULAN";
+    $participant_content .= '
+    <table class="info-table">
+        <thead>
+            <tr>
+                <th style="width: 5%;">NO.</th>
+                <th style="width: 40%;">NAMA PESERTA</th>
+                <th style="width: 25%;">NO. KP / SIJIL</th>
+                <th style="width: 15%;">KATEGORI</th>
+                <th style="width: 15%;">SAIZ BAJU</th>
+            </tr>
+        </thead>
+        <tbody>';
+    
+    $counter = 1;
+    foreach ($group_members as $member) {
+        $participant_content .= '
+        <tr>
+            <td style="text-align: center;">' . $counter++ . '</td>
+            <td>' . strtoupper($member['nama_penuh']) . '</td>
+            <td>' . $member['ic_number'] . '</td>
+            <td><strong style="color: #d35400;">' . $member['distance'] . '</strong></td>
+            <td>' . $member['tshirt_size'] . ' <span style="font-size:10px; color:#666;">(' . $member['tshirt_type'] . ')</span></td>
+        </tr>';
+    }
+    
+    $participant_content .= '
+        </tbody>
+    </table>
+    <div style="text-align: right; margin-top: 10px; font-size: 14px;">
+        <strong>Jumlah Peserta:</strong> ' . count($group_members) . ' Orang
+    </div>';
+
+} else {
+    // INDIVIDUAL VIEW HTML (Existing)
+    $receipt_title = "RESIT RASMI PENDAFTARAN";
+    $participant_content .= '
+    <table class="info-table">
+        <tr>
+            <th>NAMA PESERTA</th>
+            <td>' . strtoupper($row['nama_penuh']) . '</td>
+        </tr>
+        <tr>
+            <th>NO. KAD PENGENALAN</th>
+            <td>' . $row['ic_number'] . '</td>
+        </tr>
+        <tr>
+            <th>NO. TELEFON</th>
+            <td>' . $row['no_telefon'] . '</td>
+        </tr>
+        <tr>
+            <th>KATEGORI LARIAN</th>
+            <td><strong style="color: #d35400;">' . $row['distance'] . '</strong></td>
+        </tr>
+        <tr>
+            <th>SAIZ BAJU</th>
+            <td>' . $row['tshirt_size'] . ' <span style="font-size:12px; color:#666;">(' . $row['tshirt_type'] . ')</span></td>
+        </tr>
+        <tr>
+            <th>STATUS BAYARAN</th>
+            <td><span class="status-badge">LULUS / DIBAYAR</span></td>
+        </tr>
+    </table>';
+}
 
 $html = '
 <!DOCTYPE html>
@@ -119,7 +213,6 @@ $html = '
             color: #fff;
             font-weight: bold;
             border-bottom: 1px solid #ddd;
-            width: 35%;
         }
         .info-table td {
             padding: 12px;
@@ -183,41 +276,16 @@ $html = '
 
         <!-- Receipt Info -->
         <div class="receipt-meta">
-            <strong>No. Resit:</strong> RFP-' . str_pad($row['id'], 5, '0', STR_PAD_LEFT) . '<br>
+            <strong>No. Resit:</strong> RFP-' . ($is_group_view ? 'GRP-' . substr(md5($row['payment_proof']), 0, 6) : str_pad($row['id'], 5, '0', STR_PAD_LEFT)) . '<br>
             <strong>Tarikh:</strong> ' . date('d/m/Y H:i A', strtotime($row['reg_date'])) . '
         </div>
 
         <div class="center-wrapper">
-            <div class="receipt-title">RESIT RASMI PENDAFTARAN</div>
+            <div class="receipt-title">' . $receipt_title . '</div>
         </div>
 
-        <!-- Participant Details -->
-        <table class="info-table">
-            <tr>
-                <th>NAMA PESERTA</th>
-                <td>' . strtoupper($row['nama_penuh']) . '</td>
-            </tr>
-            <tr>
-                <th>NO. KAD PENGENALAN</th>
-                <td>' . $row['ic_number'] . '</td>
-            </tr>
-            <tr>
-                <th>NO. TELEFON</th>
-                <td>' . $row['no_telefon'] . '</td>
-            </tr>
-            <tr>
-                <th>KATEGORI LARIAN</th>
-                <td><strong style="color: #d35400;">' . $row['distance'] . '</strong></td>
-            </tr>
-            <tr>
-                <th>SAIZ BAJU</th>
-                <td>' . $row['tshirt_size'] . ' <span style="font-size:12px; color:#666;">(' . $row['tshirt_type'] . ')</span></td>
-            </tr>
-            <tr>
-                <th>STATUS BAYARAN</th>
-                <td><span class="status-badge">LULUS / DIBAYAR</span></td>
-            </tr>
-        </table>
+        <!-- Participant Content -->
+        ' . $participant_content . '
 
         <!-- Important Notes -->
         <div class="note-box">
@@ -241,5 +309,5 @@ $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
 
 // 6. Output PDF (Download)
-$dompdf->stream("Resit_RFP_" . $row['id'] . ".pdf", ["Attachment" => false]); // false = open in browser, true = download
+$dompdf->stream("Resit_RFP_" . ($is_group_view ? 'GRP' : $row['id']) . ".pdf", ["Attachment" => true]); // true = force download
 ?>
