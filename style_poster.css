@@ -1,0 +1,723 @@
+/* 
+   ==========================================================================
+   POSTER STYLE (pendaftaran_individu.php)
+   Theme: Professional Dark Blue (Run For Peace)
+   ========================================================================== 
+*/
+
+/* --- GLOBAL RESET & VARIABLES --- */
+:root {
+    --primary-color: #003366;   /* Dark Navy Blue */
+    --secondary-color: #0056b3; /* Medium Blue */
+    --accent-color: #ffcc00;    /* Gold for highlights */
+    --text-dark: #2d3436;
+    --text-light: #636e72;
+    --white: #ffffff;
+    --bg-gradient: linear-gradient(135deg, #e6f0fa 0%, #cce0f5 100%);
+    --card-shadow: 0 10px 30px rgba(0, 51, 102, 0.15);
+    --hover-shadow: 0 20px 40px rgba(0, 51, 102, 0.25);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body.poster-body {
+    font-family: 'Poppins', sans-serif;
+    background: #ffffff; 
+    /* Full Image Background without overlay */
+    background-image: url('img/laa.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    color: var(--text-dark);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* --- MAIN CONTAINER (THE POSTER) --- */
+.poster-container {
+    max-width: 1000px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    border-radius: 24px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    position: relative;
+    animation: slideUpFade 0.8s ease-out;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Add a subtle pattern overlay */
+.poster-container::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: radial-gradient(#003366 0.5px, transparent 0.5px);
+    background-size: 10px 10px;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes slideUpFade {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- ANIMATIONS --- */
+@keyframes slideUpFade {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(0, 51, 102, 0.2); }
+    50% { box-shadow: 0 0 40px rgba(0, 86, 179, 0.4); }
+}
+
+@keyframes text-shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+@keyframes shine {
+    100% { left: 125%; }
+}
+
+/* --- HEADER SECTION --- */
+.poster-header {
+    background: transparent;
+    padding: 1.5rem 2rem;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    position: relative;
+    overflow: hidden;
+    border-bottom: none;
+    z-index: 10;
+}
+
+.poster-header::before {
+    display: none;
+}
+
+.logos-container {
+    display: flex;
+    gap: 1.5rem;
+    z-index: 2;
+}
+
+.header-logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.9);
+    background: var(--white);
+    object-fit: cover;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    animation: float 4s ease-in-out infinite;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.header-logo:nth-child(2) {
+    animation-delay: 2s; /* Offset float for second logo */
+}
+
+.header-logo:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(0, 86, 179, 0.6);
+}
+
+.header-text {
+    text-align: left;
+    z-index: 2;
+}
+
+.header-text h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.header-text p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* --- HERO TITLE SECTION --- */
+.hero-title-section {
+    text-align: center;
+    padding: 3rem 1rem;
+    position: relative;
+    background-image: radial-gradient(#dceeff 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+.script-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 5rem;
+    line-height: 1.1;
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    transform: rotate(-2deg);
+    display: inline-block;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+}
+
+.price-burst {
+    position: absolute;
+    top: 5%;
+    right: 15%;
+    background: var(--accent-color);
+    color: var(--primary-color);
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bangers', cursive;
+    font-size: 2.5rem;
+    transform: rotate(15deg);
+    box-shadow: 5px 5px 0px rgba(0,0,0,0.2);
+    border: 3px solid var(--text-dark);
+    z-index: 10;
+    animation: pop 2s infinite ease-in-out;
+    clip-path: polygon(
+        20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%
+    ); /* Octagon shape for now, or starburst if complex */
+    /* Starburst using conic-gradient or clip-path is complex, stick to jagged polygon */
+    clip-path: polygon(
+        50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 
+        50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%
+    );
+    animation: float 3s ease-in-out infinite;
+}
+
+.price-burst span {
+    transform: rotate(-15deg);
+}
+
+@keyframes float {
+    0%, 100% { transform: rotate(15deg) translateY(0); }
+    50% { transform: rotate(15deg) translateY(-10px); }
+}
+
+@keyframes pop {
+    0%, 100% { transform: rotate(15deg) scale(1); }
+    50% { transform: rotate(15deg) scale(1.1); }
+}
+
+/* --- CONTENT GRID --- */
+.poster-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 2.5rem;
+    padding: 0 3rem 2rem 3rem;
+}
+
+.info-box {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 2.5rem;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 
+        0 20px 40px rgba(0, 51, 102, 0.1),
+        inset 0 0 20px rgba(255, 255, 255, 0.5);
+    height: auto;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 50px rgba(0, 51, 102, 0.2);
+    background: rgba(255, 255, 255, 0.85);
+}
+
+.info-box::before {
+    display: none;
+}
+
+.info-header {
+    background: var(--primary-color);
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2rem;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    border-bottom: none;
+    box-shadow: 3px 3px 0px rgba(0,0,0,0.2);
+}
+
+.benefit-list {
+    list-style: none;
+}
+
+.benefit-list li {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 600;
+    color: var(--text-dark);
+    font-size: 1rem;
+}
+
+.benefit-list li .icon {
+    font-size: 1.4rem;
+    width: 35px;
+    height: 35px;
+    background: #e6f0fa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary-color);
+}
+
+.distance-burst-mobile {
+    display: none;
+}
+
+/* RIGHT COLUMN: MERCHANDISE */
+.merch-display {
+    background: transparent;
+    padding: 0;
+    border: none;
+}
+
+.merch-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.merch-item {
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 2px solid rgba(0, 51, 102, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.merch-item::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 5px;
+    background: var(--primary-color);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.merch-item:first-child {
+    grid-column: span 2;
+}
+
+.merch-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 51, 102, 0.15);
+    border-color: rgba(0, 51, 102, 0.1);
+}
+
+.merch-item:hover::before {
+    transform: scaleX(1);
+}
+
+.merch-item img {
+    width: 100%;
+    height: 140px;
+    object-fit: contain;
+    margin-bottom: 0.8rem;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
+}
+
+.merch-item:hover img {
+    transform: scale(1.1) rotate(3deg);
+}
+
+.merch-label {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 0.5rem;
+}
+
+/* --- INFO BANNER (Date & Location) --- */
+.info-banner {
+    background: var(--primary-color);
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2.5rem 2rem;
+    gap: 4rem;
+    margin: 2rem 0;
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    padding-bottom: 4rem;
+}
+
+.info-banner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    z-index: 1;
+}
+
+.highlight-text {
+    font-family: 'Bangers', cursive;
+    font-size: 2rem;
+    color: var(--accent-color);
+    letter-spacing: 1px;
+    margin-bottom: 0.2rem;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
+}
+
+.sub-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #e6f0fa;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.divider {
+    width: 1px;
+    height: 50px;
+    background: rgba(255,255,255,0.3);
+}
+
+/* --- BOTTOM ACTION SECTION --- */
+.bottom-action-section {
+    padding: 1rem 3rem 3rem 3rem;
+    text-align: center;
+}
+
+.extra-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2.5rem;
+}
+
+.distance-burst-desktop {
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 0.5rem 2rem;
+    border-radius: 50px;
+    font-family: 'Bangers', cursive;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 51, 102, 0.4);
+    letter-spacing: 2px;
+}
+
+.feature-list {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.feature-list li {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: var(--text-light);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f1f2f6;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+}
+
+.feature-list li i {
+    color: var(--secondary-color);
+}
+
+/* CTA BUTTON */
+.cta-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.cta-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    line-height: 1;
+    color: var(--primary-color);
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+    animation: pulse-scale 2s infinite;
+}
+
+@keyframes pulse-scale {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.register-btn-large {
+    display: inline-block;
+    background: linear-gradient(45deg, var(--secondary-color), var(--primary-color), var(--secondary-color));
+    background-size: 200% auto;
+    color: var(--white);
+    padding: 1.2rem 3.5rem;
+    border-radius: 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 10px 25px rgba(0, 51, 102, 0.4);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    animation: btn-gradient 3s infinite linear;
+}
+
+@keyframes btn-gradient {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
+
+.register-btn-large:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(0, 51, 102, 0.6);
+}
+
+.contact-box {
+    margin-top: 2.5rem;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 1.5rem 2rem;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 51, 102, 0.1);
+    text-align: center;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-box:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px rgba(0, 51, 102, 0.2);
+    border-color: var(--secondary-color);
+}
+
+.contact-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 6px;
+    background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+}
+
+.contact-box .label {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--white);
+    background: var(--primary-color);
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 0.4rem 1.2rem;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.contact-details p {
+    margin: 0.2rem 0;
+}
+
+.contact-name {
+    font-family: 'Bangers', cursive;
+    font-weight: 500;
+    color: var(--secondary-color);
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    margin-top: 0.5rem !important;
+}
+
+/* BACK LINK */
+.back-link-container {
+    text-align: center;
+    padding: 1.5rem;
+    background: #f8f8f8;
+    border-top: 1px solid #eee;
+}
+
+.back-link {
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+    font-size: 0.9rem;
+}
+
+.back-link:hover {
+    color: var(--primary-color);
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 992px) {
+    .poster-content-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 0 2rem 2rem 2rem;
+    }
+    
+    .poster-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem;
+    }
+    
+    .header-text {
+        text-align: center;
+    }
+    
+    .price-burst {
+        right: 5%;
+        top: 2rem;
+        width: 80px;
+        height: 80px;
+        font-size: 1.5rem;
+    }
+    
+    .script-title {
+        font-size: 3.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .info-banner {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 2rem 1rem 4rem 1rem;
+    }
+    
+    .divider {
+        display: none;
+    }
+    
+    .merch-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .feature-list {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    
+    .distance-burst-desktop { display: none; }
+    .distance-burst-mobile { 
+        display: inline-block;
+        background: var(--primary-color);
+        color: white;
+        padding: 0.5rem 1.5rem;
+        border-radius: 50px;
+        font-weight: bold;
+        margin: 1rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .poster-container {
+        border-radius: 0;
+        box-shadow: none;
+    }
+    
+    body.poster-body {
+        padding: 0;
+    }
+    
+    .script-title {
+        font-size: 3rem;
+    }
+    
+    .merch-grid {
+        grid-template-columns: 1fr; 
+    }
+    
+    .register-btn-large {
+        padding: 1rem 2rem;
+        width: 100%;
+    }
+    
+    .poster-content-grid {
+        padding: 0 1.5rem 2rem 1.5rem;
+    }
+    
+    .price-burst {
+        width: 70px;
+        height: 70px;
+        font-size: 1.2rem;
+        right: 1rem;
+    }
+}
