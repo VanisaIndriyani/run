@@ -53,7 +53,7 @@ $result = $conn->query($sql);
         <div class="main-content">
             <div class="content-header">
                 <h2 class="content-title">Daftar Peserta Berkelompok</h2>
-                <a href="#" onclick="window.print()" class="btn-sm"><i class="fas fa-print"></i> Cetak</a>
+                <a href="print_group_list.php" class="btn-sm"><i class="fas fa-print"></i> Cetak PDF</a>
             </div>
 
             <div class="card">

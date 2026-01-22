@@ -68,14 +68,14 @@ if ($is_group_view) {
     // GROUP VIEW HTML
     $receipt_title = "RESIT PENDAFTARAN BERKUMPULAN";
     $participant_content .= '
-    <table class="info-table">
+    <table class="group-table">
         <thead>
             <tr>
-                <th style="width: 5%;">NO.</th>
-                <th style="width: 40%;">NAMA PESERTA</th>
+                <th style="width: 5%; text-align: center;">NO.</th>
+                <th style="width: 35%;">NAMA PESERTA</th>
                 <th style="width: 25%;">NO. KP / SIJIL</th>
-                <th style="width: 15%;">KATEGORI</th>
-                <th style="width: 15%;">SAIZ BAJU</th>
+                <th style="width: 15%; text-align: center;">JARAK</th>
+                <th style="width: 20%; text-align: center;">SAIZ BAJU</th>
             </tr>
         </thead>
         <tbody>';
@@ -85,48 +85,48 @@ if ($is_group_view) {
         $participant_content .= '
         <tr>
             <td style="text-align: center;">' . $counter++ . '</td>
-            <td>' . strtoupper($member['nama_penuh']) . '</td>
+            <td style="font-weight: bold; color: #333;">' . strtoupper($member['nama_penuh']) . '</td>
             <td>' . $member['ic_number'] . '</td>
-            <td><strong style="color: #d35400;">' . $member['distance'] . '</strong></td>
-            <td>' . $member['tshirt_size'] . ' <span style="font-size:10px; color:#666;">(' . $member['tshirt_type'] . ')</span></td>
+            <td style="text-align: center;"><span class="badge">' . $member['distance'] . '</span></td>
+            <td style="text-align: center;">' . $member['tshirt_size'] . ' <span style="font-size:10px; color:#777;">(' . $member['tshirt_type'] . ')</span></td>
         </tr>';
     }
     
     $participant_content .= '
         </tbody>
     </table>
-    <div style="text-align: right; margin-top: 10px; font-size: 14px;">
-        <strong>Jumlah Peserta:</strong> ' . count($group_members) . ' Orang
+    <div class="total-box">
+        Jumlah Peserta: <strong>' . count($group_members) . ' Orang</strong>
     </div>';
 
 } else {
     // INDIVIDUAL VIEW HTML (Existing)
     $receipt_title = "RESIT RASMI PENDAFTARAN";
     $participant_content .= '
-    <table class="info-table">
+    <table class="individual-table">
         <tr>
-            <th>NAMA PESERTA</th>
-            <td>' . strtoupper($row['nama_penuh']) . '</td>
+            <td class="label">NAMA PESERTA</td>
+            <td class="value"><strong>' . strtoupper($row['nama_penuh']) . '</strong></td>
         </tr>
         <tr>
-            <th>NO. KAD PENGENALAN</th>
-            <td>' . $row['ic_number'] . '</td>
+            <td class="label">NO. KAD PENGENALAN</td>
+            <td class="value">' . $row['ic_number'] . '</td>
         </tr>
         <tr>
-            <th>NO. TELEFON</th>
-            <td>' . $row['no_telefon'] . '</td>
+            <td class="label">NO. TELEFON</td>
+            <td class="value">' . $row['no_telefon'] . '</td>
         </tr>
         <tr>
-            <th>KATEGORI LARIAN</th>
-            <td><strong style="color: #d35400;">' . $row['distance'] . '</strong></td>
+            <td class="label">KATEGORI LARIAN</td>
+            <td class="value"><span class="badge">' . $row['distance'] . '</span></td>
         </tr>
         <tr>
-            <th>SAIZ BAJU</th>
-            <td>' . $row['tshirt_size'] . ' <span style="font-size:12px; color:#666;">(' . $row['tshirt_type'] . ')</span></td>
+            <td class="label">SAIZ BAJU</td>
+            <td class="value">' . $row['tshirt_size'] . ' <span style="font-size:12px; color:#666;">(' . $row['tshirt_type'] . ')</span></td>
         </tr>
         <tr>
-            <th>STATUS BAYARAN</th>
-            <td><span class="status-badge">LULUS / DIBAYAR</span></td>
+            <td class="label">STATUS BAYARAN</td>
+            <td class="value"><span class="status-badge">LULUS / DIBAYAR</span></td>
         </tr>
     </table>';
 }
@@ -138,150 +138,213 @@ $html = '
     <meta charset="UTF-8">
     <title>Resit Pendaftaran - Run For Peace 2026</title>
     <style>
+        @page { margin: 0px; }
         body {
             font-family: "Helvetica", "Arial", sans-serif;
             color: #333;
-            line-height: 1.6;
+            line-height: 1.4;
             margin: 0;
             padding: 0;
+            background-color: #fff;
+        }
+        .header-bg {
+            background-color: #003366;
+            height: 20px;
+            width: 100%;
         }
         .container {
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            border: 1px solid #ccc;
-            padding: 40px;
-            background: #fff;
+            padding: 40px 50px;
         }
         .header-table {
             width: 100%;
-            border-bottom: 3px solid #003366;
+            border-bottom: 2px solid #003366;
             padding-bottom: 20px;
             margin-bottom: 30px;
         }
-        .logo-cell {
-            width: 100px;
-            vertical-align: middle;
-        }
         .logo-img {
-            width: 90px;
+            width: 80px;
             height: auto;
         }
-        .title-cell {
-            vertical-align: middle;
-            text-align: left;
-            padding-left: 15px;
-        }
         .org-name {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: bold;
-            color: #555;
+            color: #666;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
         .event-name {
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 900;
             color: #003366;
             margin: 5px 0;
-            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .receipt-header {
+            display: table;
+            width: 100%;
+            margin-bottom: 30px;
         }
         .receipt-title {
-            text-align: center;
-            font-size: 20px;
+            font-size: 22px;
             font-weight: bold;
             color: #003366;
-            margin-bottom: 10px;
             text-transform: uppercase;
-            border: 1px solid #003366;
-            padding: 8px;
-            display: inline-block;
-            background-color: #f0f4f8;
-        }
-        .center-wrapper {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .info-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 30px;
-        }
-        .info-table th {
-            text-align: left;
-            padding: 12px;
-            background-color: #003366;
-            color: #fff;
-            font-weight: bold;
-            border-bottom: 1px solid #ddd;
-        }
-        .info-table td {
-            padding: 12px;
-            border-bottom: 1px solid #eee;
-            color: #333;
-            font-size: 14px;
-        }
-        .info-table tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        .status-badge {
-            font-size: 12px;
-            color: #fff;
-            background-color: #28a745;
-            padding: 4px 8px;
-            border-radius: 4px;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-        .footer {
-            margin-top: 40px;
-            text-align: center;
-            font-size: 11px;
-            color: #777;
-            border-top: 1px solid #eee;
-            padding-top: 20px;
-        }
-        .note-box {
-            background-color: #fff8e1;
-            border: 1px solid #ffeeba;
-            color: #856404;
-            padding: 15px;
-            border-radius: 5px;
-            font-size: 13px;
-            margin-top: 20px;
-            text-align: center;
+            border-left: 5px solid #d35400;
+            padding-left: 15px;
         }
         .receipt-meta {
             text-align: right;
             font-size: 12px;
-            color: #666;
-            margin-bottom: 5px;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        /* Group Table Styles */
+        .group-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 12px;
+        }
+        .group-table th {
+            background-color: #003366;
+            color: #fff;
+            padding: 10px;
+            text-align: left;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 11px;
+        }
+        .group-table td {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            color: #333;
+        }
+        .group-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        /* Individual Table Styles */
+        .individual-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .individual-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 13px;
+        }
+        .individual-table .label {
+            width: 35%;
+            font-weight: bold;
+            color: #555;
+            background-color: #f8f9fa;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+        }
+        .individual-table .value {
+            width: 65%;
+            color: #000;
+        }
+
+        /* Components */
+        .badge {
+            background-color: #e3f2fd;
+            color: #0d47a1;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 11px;
+            border: 1px solid #bbdefb;
+        }
+        .status-badge {
+            background-color: #28a745;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .total-box {
+            text-align: right;
+            background-color: #f0f4f8;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #003366;
+            margin-bottom: 20px;
+        }
+        
+        /* Footer & Notes */
+        .note-box {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            font-size: 11px;
+            color: #856404;
+            margin-top: 30px;
+            line-height: 1.5;
+        }
+        .footer {
+            position: fixed;
+            bottom: 40px;
+            left: 50px;
+            right: 50px;
+            text-align: center;
+            font-size: 10px;
+            color: #999;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+        .watermark {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 100px;
+            color: rgba(0, 51, 102, 0.05);
+            font-weight: bold;
+            z-index: -1;
+            white-space: nowrap;
         }
     </style>
 </head>
 <body>
+    <div class="header-bg"></div>
+    
+    <div class="watermark">RUN FOR PEACE</div>
+
     <div class="container">
         <!-- Header -->
         <table class="header-table">
             <tr>
-                <td class="logo-cell">
+                <td style="width: 100px; vertical-align: middle;">
                     <img src="' . $logoSrc . '" class="logo-img" alt="Logo">
                 </td>
-                <td class="title-cell">
+                <td style="vertical-align: middle; padding-left: 20px;">
                     <div class="org-name">Persekutuan Pengakap Malaysia Daerah Tangkak</div>
                     <div class="event-name">RUN FOR PEACE 2026</div>
-                    <div style="font-size: 12px; color: #777;">Tangkak, Johor Darul Takzim</div>
+                    <div style="font-size: 11px; color: #777;">Jalan Hospital, 84900 Tangkak, Johor</div>
                 </td>
             </tr>
         </table>
 
-        <!-- Receipt Info -->
-        <div class="receipt-meta">
-            <strong>No. Resit:</strong> RFP-' . ($is_group_view ? 'GRP-' . substr(md5($row['payment_proof']), 0, 6) : str_pad($row['id'], 5, '0', STR_PAD_LEFT)) . '<br>
-            <strong>Tarikh:</strong> ' . date('d/m/Y H:i A', strtotime($row['reg_date'])) . '
-        </div>
-
-        <div class="center-wrapper">
-            <div class="receipt-title">' . $receipt_title . '</div>
+        <!-- Receipt Header & Meta -->
+        <div class="receipt-header">
+            <div style="display: table-cell; vertical-align: middle;">
+                <div class="receipt-title">' . $receipt_title . '</div>
+            </div>
+            <div style="display: table-cell; vertical-align: middle; text-align: right;">
+                <div class="receipt-meta">
+                    <strong>NO. RESIT:</strong> <span style="font-family: monospace; font-size: 14px; color: #000;">RFP-' . ($is_group_view ? 'GRP-' . substr(md5($row['payment_proof']), 0, 6) : str_pad($row['id'], 5, '0', STR_PAD_LEFT)) . '</span><br>
+                    <strong>TARIKH:</strong> ' . date('d/m/Y', strtotime($row['reg_date'])) . '<br>
+                    <strong>MASA:</strong> ' . date('h:i A', strtotime($row['reg_date'])) . '
+                </div>
+            </div>
         </div>
 
         <!-- Participant Content -->
@@ -290,14 +353,15 @@ $html = '
         <!-- Important Notes -->
         <div class="note-box">
             <strong>PENTING:</strong><br>
-            Sila simpan resit ini (digital atau cetakan) sebagai bukti pendaftaran.<br>
-            Resit ini <u>WAJIB</u> dikemukakan semasa pengambilan Race Kit.
+            1. Sila simpan resit ini (digital atau cetakan) sebagai bukti pendaftaran yang sah.<br>
+            2. Resit ini <u>WAJIB</u> dikemukakan semasa pengambilan Race Kit (Race Kit Collection).<br>
+            3. Penganjur berhak meminta pengenalan diri bagi tujuan pengesahan.
         </div>
 
         <!-- Footer -->
         <div class="footer">
-            <p>Ini adalah cetakan komputer. Tandatangan tidak diperlukan.</p>
-            <p>&copy; 2026 Persekutuan Pengakap Malaysia Daerah Tangkak | Run For Peace 2026</p>
+            Cetakan Komputer | Tandatangan tidak diperlukan.<br>
+            &copy; 2026 Persekutuan Pengakap Malaysia Daerah Tangkak. Hak Cipta Terpelihara.
         </div>
     </div>
 </body>
