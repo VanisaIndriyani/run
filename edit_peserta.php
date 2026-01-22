@@ -68,32 +68,9 @@ if (!$row) {
     <link rel="stylesheet" href="style_admin.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-        }
-        .full-width {
-            grid-column: span 2;
-        }
-        .btn-save {
-            background: #28a745;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-        .btn-save:hover { background: #218838; }
-        .alert { padding: 10px; border-radius: 5px; margin-bottom: 20px; }
-        .success { background: #d4edda; color: #155724; }
-        .error { background: #f8d7da; color: #721c24; }
-        @media(max-width: 600px) { .form-grid { grid-template-columns: 1fr; } .full-width { grid-column: span 1; } }
-    </style>
 </head>
 <body>
+    <div class="sidebar-overlay"></div>
     <div class="wrapper">
         <nav class="sidebar">
             <div class="sidebar-header">
@@ -110,7 +87,10 @@ if (!$row) {
 
         <div class="main-content">
             <div class="content-header">
-                <h2 class="content-title">Edit Peserta</h2>
+                <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+                <div style="flex:1;">
+                    <h2 class="content-title">Edit Peserta</h2>
+                </div>
                 <a href="<?php echo ($source === 'group') ? 'admin_berkumpul.php' : 'admin_individu.php'; ?>" class="btn-sm" style="background: #6c757d;">&larr; Kembali</a>
             </div>
 
@@ -211,11 +191,28 @@ if (!$row) {
                     </div>
 
                     <div style="margin-top: 30px;">
-                        <button type="submit" class="btn-save"><i class="fas fa-save"></i> Simpan Perubahan</button>
+                        <button type="submit" class="btn-sm btn-success"><i class="fas fa-save"></i> Simpan Perubahan</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    <script>
+        const sidebar = document.querySelector('.sidebar');
+        const overlay = document.querySelector('.sidebar-overlay');
+        const toggle = document.querySelector('.menu-toggle');
+
+        if(toggle) {
+            toggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+            });
+
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+        }
+    </script>
 </body>
 </html>

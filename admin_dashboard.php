@@ -28,6 +28,7 @@ $total = $count_indiv + $count_group;
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <div class="sidebar-overlay"></div>
     <div class="wrapper">
         <!-- Sidebar -->
         <nav class="sidebar">
@@ -46,31 +47,72 @@ $total = $count_indiv + $count_group;
         <!-- Main Content -->
         <div class="main-content">
             <div class="content-header">
-                <h2 class="content-title">Dashboard Overview</h2>
-                <span>Selamat Datang, <strong><?php echo $_SESSION['admin_username']; ?></strong></span>
+                <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+                <div>
+                    <h2 class="content-title">Dashboard Overview</h2>
+                    <p style="color: #666; font-size: 0.9rem; margin-top: 5px;">Selamat Datang, <strong><?php echo $_SESSION['admin_username']; ?></strong></p>
+                </div>
             </div>
 
             <div class="card">
-                <h3>Statistik Pendaftaran</h3>
-                <div style="display: flex; gap: 2rem; margin-top: 1rem; flex-wrap: wrap;">
-                    <div style="flex: 1; background: #e3f2fd; padding: 1.5rem; border-radius: 10px; text-align: center;">
-                        <i class="fas fa-users fa-3x" style="color: #0069d9; margin-bottom: 10px;"></i>
-                        <h2><?php echo $total; ?></h2>
-                        <p>Jumlah Peserta</p>
+                <h3 style="margin-bottom: 20px; color: #003366;">Statistik Pendaftaran</h3>
+                
+                <div class="dashboard-stats">
+                    <!-- Total Participants -->
+                    <div class="dashboard-stat-card stat-card-blue">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h2><?php echo $total; ?></h2>
+                            <p>Jumlah Peserta</p>
+                        </div>
                     </div>
-                    <div style="flex: 1; background: #e8f5e9; padding: 1.5rem; border-radius: 10px; text-align: center;">
-                        <i class="fas fa-user fa-3x" style="color: #2e7d32; margin-bottom: 10px;"></i>
-                        <h2><?php echo $count_indiv; ?></h2>
-                        <p>Individu</p>
-                    </div>
-                    <div style="flex: 1; background: #fff3e0; padding: 1.5rem; border-radius: 10px; text-align: center;">
-                        <i class="fas fa-users-cog fa-3x" style="color: #ef6c00; margin-bottom: 10px;"></i>
-                        <h2><?php echo $count_group; ?></h2>
-                        <p>Berkelompok</p>
-                    </div>
+
+                    <!-- Individual (Clickable) -->
+                    <a href="admin_individu.php" class="dashboard-stat-card stat-card-green">
+                        <div class="stat-icon">
+                            <i class="fas fa-running"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h2><?php echo $count_indiv; ?></h2>
+                            <p>Peserta Individu</p>
+                        </div>
+                        <i class="fas fa-arrow-right" style="margin-left: auto; color: #ccc;"></i>
+                    </a>
+
+                    <!-- Group (Clickable) -->
+                    <a href="admin_berkumpul.php" class="dashboard-stat-card stat-card-orange">
+                        <div class="stat-icon">
+                            <i class="fas fa-users-cog"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h2><?php echo $count_group; ?></h2>
+                            <p>Peserta Berkelompok</p>
+                        </div>
+                        <i class="fas fa-arrow-right" style="margin-left: auto; color: #ccc;"></i>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
+    
+    <script>
+        const sidebar = document.querySelector('.sidebar');
+        const overlay = document.querySelector('.sidebar-overlay');
+        const toggle = document.querySelector('.menu-toggle');
+
+        if(toggle) {
+            toggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+            });
+
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+        }
+    </script>
 </body>
 </html>

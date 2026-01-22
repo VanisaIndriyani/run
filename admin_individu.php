@@ -23,18 +23,9 @@ $result = $conn->query($sql);
     <link rel="stylesheet" href="style_admin.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        .data-table th, .data-table td {
-            white-space: nowrap;
-            font-size: 0.9rem;
-        }
-        .ec-header {
-            text-align: center;
-            background-color: #e9ecef !important;
-        }
-    </style>
 </head>
 <body>
+    <div class="sidebar-overlay"></div>
     <div class="wrapper">
         <!-- Sidebar -->
         <nav class="sidebar">
@@ -53,7 +44,10 @@ $result = $conn->query($sql);
         <!-- Main Content -->
         <div class="main-content">
             <div class="content-header">
-                <h2 class="content-title">Daftar Peserta Individu</h2>
+                <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+                <div style="flex:1;">
+                    <h2 class="content-title">Daftar Peserta Individu</h2>
+                </div>
                 <a href="print_individual_list.php" class="btn-sm"><i class="fas fa-print"></i> Cetak PDF</a>
             </div>
 
@@ -80,9 +74,9 @@ $result = $conn->query($sql);
                                     <td><?php echo htmlspecialchars($row['no_telefon']); ?></td>
                                     <td><?php echo htmlspecialchars($row['distance']); ?></td>
                                     <td style="white-space: nowrap;">
-                                        <a href="view_peserta.php?id=<?php echo $row['id']; ?>&source=individual" class="btn-sm" style="background: #17a2b8;" title="Lihat"><i class="fas fa-eye"></i></a>
-                                        <a href="edit_peserta.php?id=<?php echo $row['id']; ?>&source=individual" class="btn-sm" style="background: #ffc107; color: #000;" title="Edit"><i class="fas fa-edit"></i></a>
-                                        <a href="print_receipt.php?id=<?php echo $row['id']; ?>&source=individual" target="_blank" class="btn-sm" title="Cetak Resit"><i class="fas fa-file-pdf"></i></a>
+                                        <a href="view_peserta.php?id=<?php echo $row['id']; ?>&source=individual" class="btn-action btn-view" title="Lihat"><i class="fas fa-eye"></i></a>
+                                        <a href="edit_peserta.php?id=<?php echo $row['id']; ?>&source=individual" class="btn-action btn-edit" title="Edit"><i class="fas fa-edit"></i></a>
+                                        <a href="print_receipt.php?id=<?php echo $row['id']; ?>&source=individual" target="_blank" class="btn-action btn-print" title="Cetak Resit"><i class="fas fa-file-pdf"></i></a>
                                     </td>
                                 </tr>
                                 <?php endwhile; ?>
@@ -97,5 +91,22 @@ $result = $conn->query($sql);
             </div>
         </div>
     </div>
+    <script>
+        const sidebar = document.querySelector('.sidebar');
+        const overlay = document.querySelector('.sidebar-overlay');
+        const toggle = document.querySelector('.menu-toggle');
+
+        if(toggle) {
+            toggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+            });
+
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+        }
+    </script>
 </body>
 </html>
