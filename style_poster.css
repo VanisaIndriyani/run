@@ -198,38 +198,30 @@ img {
     position: absolute;
     top: 5%;
     right: 15%;
-    background: var(--accent-color);
-    color: var(--primary-color);
-    width: 120px;
-    height: 120px;
+    background: #ffcc00; /* Yellow */
+    color: #6d1f1f; /* Dark Reddish Brown Text */
+    width: 130px;
+    height: 130px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: 'Bangers', cursive;
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     transform: rotate(15deg);
-    box-shadow: 5px 5px 0px rgba(0,0,0,0.2);
-    border: 3px solid var(--text-dark);
     z-index: 10;
     animation: pop 2s infinite ease-in-out;
-    clip-path: polygon(
-        20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%
-    ); /* Octagon shape for now, or starburst if complex */
-    /* Starburst using conic-gradient or clip-path is complex, stick to jagged polygon */
-    clip-path: polygon(
-        50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 
-        50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%
-    );
-    animation: float 3s ease-in-out infinite;
+    border-radius: 50%; /* Perfect Circle */
+    border: 4px solid #fff; /* White border like a sticker */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
 .price-burst span {
-    transform: rotate(-15deg);
-}
-
-@keyframes float {
-    0%, 100% { transform: rotate(15deg) translateY(0); }
-    50% { transform: rotate(15deg) translateY(-10px); }
+    transform: rotate(-5deg);
+    background: transparent;
+    color: #6d1f1f;
+    padding: 0;
+    border: none;
+    box-shadow: none;
 }
 
 @keyframes pop {

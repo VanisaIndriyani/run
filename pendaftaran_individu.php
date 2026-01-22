@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pendaftaran Individu - Run For Peace 2026</title>
-    <link rel="stylesheet" href="style_poster.css?v=10009">
+    <link rel="stylesheet" href="style_poster.css?v=10012">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Poppins:wght@400;600;700&family=Dancing+Script:wght@700&family=Bangers&display=swap" rel="stylesheet">
@@ -28,7 +28,7 @@
         <section class="hero-title-section">
             <h1 class="script-title">Run for <br>Peace 2026</h1>
             <div class="price-burst">
-                <span>RM40</span>
+                <span>RM 50</span>
             </div>
         </section>
 
@@ -41,6 +41,7 @@
                     <ul class="benefit-list">
                         <li><span class="icon">🎒</span> SARAPAN PAGI</li>
                         <li><span class="icon">👕</span> TSHIRT LARIAN</li>
+                        <li><span class="icon">🧢</span> HEADBAND</li>
                         <li><span class="icon">🏅</span> MEDAL</li>
                         <li><span class="icon">📜</span> SIJIL</li>
                         <li><span class="icon">🎁</span> PELUANG MENYERTAI<br>CABUTAN BERTUAH</li>
@@ -78,13 +79,13 @@
         <!-- Date & Location Banner -->
         <div class="info-banner">
             <div class="info-item date-item">
-                <span class="highlight-text">28 SEPTEMBER 2026</span>
-                <span class="sub-text">AHAD</span>
+                <span class="highlight-text">18 JULAI 2026</span>
+                <span class="sub-text">SABTU</span>
             </div>
             <div class="divider"></div>
             <div class="info-item location-item">
-                <span class="highlight-text">SMK SAGIL - TAMAN NEGARA</span>
-                <span class="sub-text">GUNUNG LEDANG</span>
+                <span class="highlight-text">SEKOLAH KEBANGSAAN SAWAH RING</span>
+                <span class="sub-text">TANGKAK, JOHOR</span>
             </div>
         </div>
 
@@ -93,9 +94,8 @@
             <div class="extra-details">
               
                 <ul class="feature-list">
-                    <li><i class="fas fa-flag"></i> PENGIKTIRAFAN PERINGKAT NEGERI JOHOR</li>
-                    <li><i class="fas fa-users"></i> TERBUKA KEPADA SEMUA UNIT BERUNIFORM</li>
-                    <li><i class="fas fa-bee"></i> SUKAN RAKYAT (PENGAKAP LEBAH)</li>
+                    <li><i class="fas fa-flag"></i> PENGIKTIRAFAN PERINGKAT KEBANGSAAN</li>
+                    <li><i class="fas fa-users"></i> TERBUKA KEPADA SEMUA UNIT BERUNIFORM DAN ORANG AWAM</li>
                 </ul>
             </div>
 
