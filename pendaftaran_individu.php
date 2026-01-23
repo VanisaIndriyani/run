@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pendaftaran Individu - Run For Peace 2026</title>
-    <link rel="stylesheet" href="style_poster.css?v=10012">
+    <link rel="stylesheet" href="style_poster.css?v=10013">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Poppins:wght@400;600;700&family=Dancing+Script:wght@700&family=Bangers&display=swap" rel="stylesheet">
@@ -70,6 +70,21 @@
                         <div class="merch-item">
                             <img src="img/dali%202.png" alt="Headband">
                             <span class="merch-label">Headband</span>
+                        </div>
+                    </div>
+
+                    <!-- Size Charts -->
+                    <div class="size-charts-wrapper">
+                        <h4 class="section-title">CARTA UKURAN / SIZE CHART</h4>
+                        <div class="size-charts-grid">
+                            <div class="size-chart-card">
+                                <span class="chart-badge">DEWASA / ADULTS</span>
+                                <img src="img/ukuran%20unisex.png" alt="Ukuran Unisex" class="chart-img">
+                            </div>
+                            <div class="size-chart-card">
+                                <span class="chart-badge">KANAK-KANAK / KIDS</span>
+                                <img src="img/ukuran%20kids.png" alt="Ukuran Kids" class="chart-img">
+                            </div>
                         </div>
                     </div>
                 </div>

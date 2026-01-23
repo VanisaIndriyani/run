@@ -4,9 +4,9 @@ $buttons = [
     ["text" => "PENDAFTARAN<br>INDIVIDU", "link" => "pendaftaran_individu.php"],
     ["text" => "PENDAFTARAN<br>BERKUMPULAN", "link" => "pendaftaran_berkumpul.php"],
     ["text" => "TREK LARIAN<br>5 KM & 10 KM", "link" => "track_larian.php"],
-    ["text" => "TENTATIF", "link" => "tentatif.php"],
+    ["text" => "ATURCARA", "link" => "tentatif.php"],
     ["text" => "SURAT & MAKLUMAT<br>BERKAITAN", "link" => "surat_maklumat.php"],
-    ["text" => "SEBARANG<br>PERTANYAAN", "link" => "pertanyaan.php"]
+    ["text" => "KAUNTER<br>PERTANYAAN", "link" => "pertanyaan.php"]
 ];
 ?>
 <!DOCTYPE html>
