@@ -75,8 +75,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Basic Validation
-    if (empty($nama_penuh) || empty($ic_number) || empty($no_telefon) || empty($tshirt_size)) {
-        die("Sila lengkapkan semua butiran wajib.");
+    $errors = [];
+    if (empty($nama_penuh)) $errors[] = "Nama Penuh diperlukan.";
+    if (empty($ic_number)) $errors[] = "No Kad Pengenalan diperlukan.";
+    if (empty($jantina)) $errors[] = "Jantina diperlukan.";
+    if (empty($umur)) $errors[] = "Umur diperlukan.";
+    if (empty($kaum)) $errors[] = "Kaum diperlukan.";
+    if (empty($agama)) $errors[] = "Agama diperlukan.";
+    if (empty($no_telefon)) $errors[] = "No Telefon diperlukan.";
+    if (empty($nama_sekolah)) $errors[] = "Nama Sekolah diperlukan (atau '-' jika tidak berkenaan).";
+    if (empty($distance)) $errors[] = "Jarak Larian diperlukan.";
+    if (empty($tshirt_size)) $errors[] = "Saiz Baju diperlukan.";
+    if (empty($ec_name)) $errors[] = "Nama Kecemasan diperlukan.";
+    if (empty($ec_number)) $errors[] = "No Telefon Kecemasan diperlukan.";
+    if (empty($payment_proof)) $errors[] = "Bukti Pembayaran diperlukan.";
+
+    if (!empty($errors)) {
+        $error_message = implode("<br>", $errors);
+        die("<div style='font-family: Arial; padding: 20px; text-align: center; border: 1px solid red; background: #ffe6e6; color: red; border-radius: 10px; max-width: 600px; margin: 50px auto;'>
+                <h3>Sila lengkapkan butiran berikut:</h3>
+                <p>$error_message</p>
+                <button onclick='history.back()' style='padding: 10px 20px; background: #333; color: #fff; border: none; border-radius: 5px; cursor: pointer;'>Kembali</button>
+             </div>");
     }
 
     $stmt = $conn->prepare("INSERT INTO participants (nama_penuh, ic_number, jantina, umur, kaum, agama, no_telefon, nama_sekolah, kod_sekolah, distance, tshirt_size, tshirt_type, ec_name, ec_number, payment_method, payment_proof, payment_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");

@@ -58,7 +58,7 @@
             <div class="form-section">
                 <h3><i class="fas fa-users"></i> Maklumat Kumpulan</h3>
                 <div class="form-group">
-                    <label>Jumlah Peserta (Orang)</label>
+                    <label>Jumlah Peserta (Orang) <span style="color:red">*</span></label>
                     <input type="number" name="total_pax" id="totalParticipants" min="1" max="150" placeholder="Contoh: 10" oninput="generateRows()" required>
                     <small class="form-hint">Masukkan jumlah peserta untuk menjana jadual.</small>
                 </div>
@@ -86,26 +86,29 @@
 
             <!-- Pembayaran -->
             <div class="form-section">
-                <h3><i class="fas fa-credit-card"></i> Pembayaran Online</h3>
-
+                <h3><i class="fas fa-wallet"></i> Pembayaran Online</h3>
+                
                 <div class="payment-card">
-                    <div class="pay-now-container">
-                        <a href="https://toyyibpay.com/BAYARAN-BERKUMPULAN" target="_blank" class="pay-now-btn">
-                            <i class="fas fa-external-link-alt"></i> BAYAR SEKARANG
-                        </a>
-                        <p class="payment-instruction">Klik butang di atas untuk membuka laman pembayaran selamat</p>
-                    </div>
+                
 
-                    <hr class="payment-divider">
+                    <a href="https://maybank2u.com.my" target="_blank" class="pay-now-btn">
+                        <i class="fas fa-external-link-alt"></i> BAYAR SEKARANG
+                    </a>
+                </div>
 
-                    <div>
-                        <input type="hidden" name="payment_method" value="ToyyibPay">
-                        
-                        <div class="form-group upload-section">
-                            <label class="upload-label">Upload Bukti Pembayaran <span style="color:red">*</span></label>
-                            <input type="file" name="payment_receipt" required accept="image/*,application/pdf" class="upload-input">
-                            <small class="upload-hint">Sila muat naik resit pembayaran anda (Gambar/PDF).</small>
+                <div class="upload-section">
+                    <label class="upload-label">Muat Naik Resit Pembayaran <span style="color:red">*</span></label>
+                    <div class="file-upload-wrapper">
+                        <input type="file" name="payment_receipt" id="payment_receipt" accept="image/*,application/pdf" required onchange="previewFile()">
+                        <div class="upload-placeholder">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Klik untuk pilih fail atau seret ke sini</span>
+                            <small>(Format: JPG, PNG, PDF)</small>
                         </div>
+                    </div>
+                    <div id="file-preview-container" style="margin-top: 15px; display: none;">
+                        <img id="file-preview-image" src="" alt="Pratonton Resit" style="max-width: 200px; max-height: 200px; border: 1px solid #ddd; border-radius: 5px; display: none;">
+                        <p id="file-preview-text" style="display: none; color: #333; font-weight: bold;"></p>
                     </div>
                 </div>
             </div>
@@ -199,27 +202,27 @@
                             <h5><i class="fas fa-user-circle"></i> Maklumat Peribadi</h5>
                             <div class="card-grid">
                                 <div class="card-field full-width">
-                                    <label>Nama Penuh (Huruf Besar)</label>
+                                    <label>Nama Penuh (Huruf Besar) <span style="color:red">*</span></label>
                                     <input type="text" name="participants[${i}][name]" class="table-input" required placeholder="Nama Penuh (seperti IC)" style="text-transform: uppercase;">
                                 </div>
                                 
                                 <div class="card-field">
-                                    <label>No. IC / MyKid</label>
+                                    <label>No. IC / MyKid <span style="color:red">*</span></label>
                                     <input type="text" name="participants[${i}][ic]" class="table-input" required placeholder="000000-00-0000">
                                 </div>
                                 
                                 <div class="card-field">
-                                    <label>Umur</label>
+                                    <label>Umur <span style="color:red">*</span></label>
                                     <input type="number" name="participants[${i}][age]" class="table-input" required placeholder="Umur">
                                 </div>
 
                                 <div class="card-field">
-                                    <label>No. Tel</label>
+                                    <label>No. Tel <span style="color:red">*</span></label>
                                     <input type="tel" name="participants[${i}][phone]" class="table-input" required placeholder="No. Tel">
                                 </div>
 
                                 <div class="card-field">
-                                    <label>Jantina</label>
+                                    <label>Jantina <span style="color:red">*</span></label>
                                     <select name="participants[${i}][gender]" class="table-select" required>
                                         <option value="Lelaki">Lelaki</option>
                                         <option value="Perempuan">Perempuan</option>
@@ -227,7 +230,7 @@
                                 </div>
 
                                 <div class="card-field">
-                                    <label>Kaum</label>
+                                    <label>Kaum <span style="color:red">*</span></label>
                                     <select name="participants[${i}][race]" class="table-select" required>
                                         <option value="Melayu">Melayu</option>
                                         <option value="Cina">Cina</option>
@@ -237,7 +240,7 @@
                                 </div>
 
                                 <div class="card-field">
-                                    <label>Agama</label>
+                                    <label>Agama <span style="color:red">*</span></label>
                                     <select name="participants[${i}][religion]" class="table-select" required>
                                         <option value="Islam">Islam</option>
                                         <option value="Buddha">Buddha</option>
@@ -248,7 +251,7 @@
                                 </div>
 
                                 <div class="card-field full-width">
-                                    <label>Nama Sekolah (Jika Pelajar)</label>
+                                    <label>Nama Sekolah (Jika Pelajar) <span style="color:red">*</span></label>
                                     <input type="text" name="participants[${i}][school]" class="table-input" placeholder="Nama Sekolah atau (-) jika tidak berkenaan">
                                 </div>
 
@@ -264,7 +267,7 @@
                             <h5><i class="fas fa-tshirt"></i> Kategori & Baju</h5>
                             <div class="card-grid">
                                 <div class="card-field full-width">
-                                    <label>Jarak Larian</label>
+                                    <label>Jarak Larian <span style="color:red">*</span></label>
                                     <div class="selection-grid" style="grid-template-columns: repeat(2, 1fr); gap: 10px;">
                                         <label class="selection-card" style="margin-bottom: 0;">
                                             <input type="radio" name="participants[${i}][distance]" value="5KM" required onchange="window.updateGroupTshirt('5KM', ${i})" checked>
@@ -293,7 +296,7 @@
                                 </div>
 
                                 <div class="card-field">
-                                    <label>Saiz Baju</label>
+                                    <label>Saiz Baju <span style="color:red">*</span></label>
                                     <select name="participants[${i}][tshirt_size]" class="table-select" required>
                                         <option value="">- Pilih Saiz -</option>
                                         <optgroup label="Kanak-kanak">
@@ -329,12 +332,12 @@
                             <h5><i class="fas fa-ambulance"></i> Maklumat Kecemasan</h5>
                             <div class="card-grid">
                                 <div class="card-field">
-                                    <label>Nama Waris</label>
+                                    <label>Nama Waris <span style="color:red">*</span></label>
                                     <input type="text" name="participants[${i}][ec_name]" class="table-input" required placeholder="Nama Waris">
                                 </div>
 
                                 <div class="card-field">
-                                    <label>Tel. Kecemasan</label>
+                                    <label>Tel. Kecemasan <span style="color:red">*</span></label>
                                     <input type="tel" name="participants[${i}][ec_phone]" class="table-input" required placeholder="Tel. Kecemasan">
                                 </div>
                             </div>
