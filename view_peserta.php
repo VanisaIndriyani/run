@@ -59,7 +59,6 @@ if (!$row) {
                     <h2 class="content-title">Lihat Maklumat Peserta</h2>
                 </div>
                 <div>
-                    <a href="edit_peserta.php?id=<?php echo $id; ?>&source=<?php echo $source; ?>" class="btn-sm btn-warning" style="margin-right: 10px;"><i class="fas fa-edit"></i> Edit</a>
                     <a href="<?php echo ($source === 'group') ? 'admin_berkumpul.php' : 'admin_individu.php'; ?>" class="btn-sm btn-secondary">&larr; Kembali</a>
                 </div>
             </div>
