@@ -26,8 +26,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // 2. Process Participants
     if (isset($_POST['participants']) && is_array($_POST['participants'])) {
         $participants = $_POST['participants'];
+        $payment_status = "Pending"; // Default status
         
-        $stmt = $conn->prepare("INSERT INTO group_participants (nama_penuh, ic_number, jantina, umur, race, agama, no_telefon, nama_sekolah, kod_sekolah, distance, tshirt_size, tshirt_type, ec_name, ec_number, payment_method, payment_proof) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO group_participants (nama_penuh, ic_number, jantina, umur, race, agama, no_telefon, nama_sekolah, kod_sekolah, distance, tshirt_size, tshirt_type, ec_name, ec_number, payment_method, payment_proof, payment_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
         foreach ($participants as $p) {
             $nama_penuh = strtoupper(trim($p['name']));

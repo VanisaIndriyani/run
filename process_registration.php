@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         if (move_uploaded_file($_FILES["payment_receipt"]["tmp_name"], $target_file)) {
             $payment_proof = $new_filename;
-            $payment_status = "Berjaya";
+            $payment_status = "Pending";
         }
     }
 
