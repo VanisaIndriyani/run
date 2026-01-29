@@ -100,6 +100,10 @@ if (!$row) {
                             <label>Nama Sekolah (Jika Pelajar)</label>
                             <input type="text" class="form-control" value="<?php echo htmlspecialchars($row['nama_sekolah'] ?? '-'); ?>" readonly>
                         </div>
+                        <div class="form-group">
+                            <label>Kod Sekolah</label>
+                            <input type="text" class="form-control" value="<?php echo htmlspecialchars($row['kod_sekolah'] ?? '-'); ?>" readonly>
+                        </div>
                     </div>
 
                     <h3 style="margin-top: 30px; margin-bottom: 20px; color: #003366; border-bottom: 2px solid #eee; padding-bottom: 10px;">Maklumat Kecemasan</h3>
@@ -134,11 +138,46 @@ if (!$row) {
                         </div>
                     </div>
 
-                    <?php if (!empty($row['payment_proof'])): ?>
-                    <h3 style="margin-top: 30px; margin-bottom: 20px; color: #003366; border-bottom: 2px solid #eee; padding-bottom: 10px;">Bukti Pembayaran</h3>
-                    <div class="form-group">
-                        <a href="uploads/<?php echo htmlspecialchars($row['payment_proof']); ?>" target="_blank" class="btn-sm btn-info"><i class="fas fa-image"></i> Lihat Bukti Pembayaran</a>
+                    <h3 class="section-header">Maklumat Pembayaran</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Kaedah Bayaran</label>
+                            <input type="text" class="form-control" value="<?php echo htmlspecialchars($row['payment_method'] ?? '-'); ?>" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Status Bayaran</label>
+                            <?php 
+                                $status = isset($row['payment_status']) ? $row['payment_status'] : 'Pending';
+                                $statusClass = ($status == 'Berjaya') ? 'status-success' : 'status-pending';
+                            ?>
+                            <div class="mt-1">
+                                <span class="status-badge <?php echo $statusClass; ?>"><?php echo htmlspecialchars($status); ?></span>
+                            </div>
+                        </div>
                     </div>
+
+                    <?php if (!empty($row['payment_proof'])): ?>
+                        <div class="form-group mt-3">
+                            <label>Bukti Pembayaran / ID Transaksi</label>
+                            <?php 
+                                $proof = $row['payment_proof'];
+                                $is_file = false;
+                                // Check if it looks like a file (has extension and exists in uploads)
+                                if (preg_match('/\.(jpg|jpeg|png|pdf)$/i', $proof)) {
+                                    $is_file = true;
+                                }
+                            ?>
+                            
+                            <?php if ($is_file): ?>
+                                <div class="mt-1">
+                                    <a href="uploads/<?php echo htmlspecialchars($proof); ?>" target="_blank" class="btn-sm btn-info">
+                                        <i class="fas fa-image"></i> Lihat Bukti (Fail)
+                                    </a>
+                                </div>
+                            <?php else: ?>
+                                <input type="text" class="form-control" value="<?php echo htmlspecialchars($proof); ?>" readonly>
+                            <?php endif; ?>
+                        </div>
                     <?php endif; ?>
                 </form>
             </div>

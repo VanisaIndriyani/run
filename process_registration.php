@@ -45,14 +45,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     
     $nama_sekolah = trim($_POST['nama_sekolah']);
+    $kod_sekolah = isset($_POST['kod_sekolah']) ? trim($_POST['kod_sekolah']) : '';
     $ec_name = trim($_POST['ec_name']);
     $ec_number = trim($_POST['ec_number']);
     
     $payment_method = $_POST['payment_method'];
     
-    // Handle File Upload
+    // Handle Payment Proof (Text Input or File)
     $payment_proof = "";
-    if (isset($_FILES['payment_receipt']) && $_FILES['payment_receipt']['error'] == 0) {
+    $payment_status = "Pending";
+    
+    if (isset($_POST['payment_ref']) && !empty($_POST['payment_ref'])) {
+        $payment_proof = trim($_POST['payment_ref']);
+        $payment_status = "Berjaya";
+    } elseif (isset($_FILES['payment_receipt']) && $_FILES['payment_receipt']['error'] == 0) {
         $target_dir = "uploads/";
         if (!file_exists($target_dir)) {
             mkdir($target_dir, 0777, true);
@@ -64,6 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         if (move_uploaded_file($_FILES["payment_receipt"]["tmp_name"], $target_file)) {
             $payment_proof = $new_filename;
+            $payment_status = "Berjaya";
         }
     }
 
@@ -72,8 +79,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Sila lengkapkan semua butiran wajib.");
     }
 
-    $stmt = $conn->prepare("INSERT INTO participants (nama_penuh, ic_number, jantina, umur, kaum, agama, no_telefon, nama_sekolah, distance, tshirt_size, tshirt_type, ec_name, ec_number, payment_method, payment_proof) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssisssssssssss", $nama_penuh, $ic_number, $jantina, $umur, $kaum, $agama, $no_telefon, $nama_sekolah, $distance, $tshirt_size, $tshirt_type, $ec_name, $ec_number, $payment_method, $payment_proof);
+    $stmt = $conn->prepare("INSERT INTO participants (nama_penuh, ic_number, jantina, umur, kaum, agama, no_telefon, nama_sekolah, kod_sekolah, distance, tshirt_size, tshirt_type, ec_name, ec_number, payment_method, payment_proof, payment_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssisssssssssssss", $nama_penuh, $ic_number, $jantina, $umur, $kaum, $agama, $no_telefon, $nama_sekolah, $kod_sekolah, $distance, $tshirt_size, $tshirt_type, $ec_name, $ec_number, $payment_method, $payment_proof, $payment_status);
 
     if ($stmt->execute()) {
         header("Location: success.php");

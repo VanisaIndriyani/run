@@ -178,7 +178,7 @@ if (!$row) {
                         </div>
                     </div>
 
-                    <h3 style="margin: 30px 0 20px; color: #003366; border-bottom: 2px solid #eee; padding-bottom: 10px;">Maklumat Kecemasan</h3>
+                    <h3 class="section-header">Maklumat Kecemasan</h3>
                     <div class="form-grid">
                         <div class="form-group">
                             <label>Nama Waris</label>
@@ -190,7 +190,19 @@ if (!$row) {
                         </div>
                     </div>
 
-                    <div style="margin-top: 30px;">
+                    <h3 class="section-header">Maklumat Pembayaran</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Status Bayaran</label>
+                            <select name="payment_status" class="form-control">
+                                <option value="Pending" <?php echo (isset($row['payment_status']) && $row['payment_status'] == 'Pending') ? 'selected' : ''; ?>>Pending</option>
+                                <option value="Berjaya" <?php echo (isset($row['payment_status']) && $row['payment_status'] == 'Berjaya') ? 'selected' : ''; ?>>Berjaya</option>
+                                <option value="Gagal" <?php echo (isset($row['payment_status']) && $row['payment_status'] == 'Gagal') ? 'selected' : ''; ?>>Gagal</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mt-5">
                         <button type="submit" class="btn-sm btn-success"><i class="fas fa-save"></i> Simpan Perubahan</button>
                     </div>
                 </form>

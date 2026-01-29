@@ -61,6 +61,7 @@ $result = $conn->query($sql);
                                 <th>NO. TEL</th>
                                 <th>JARAK LARIAN</th>
                                 <th>JUMLAH PESERTA</th>
+                                <th>STATUS BAYARAN</th>
                                 <th>AKSI</th>
                             </tr>
                         </thead>
@@ -73,10 +74,17 @@ $result = $conn->query($sql);
                                     <td><?php echo htmlspecialchars($row['ic_number']); ?></td>
                                     <td><?php echo htmlspecialchars($row['no_telefon']); ?></td>
                                     <td><?php echo htmlspecialchars($row['distance']); ?></td>
-                                    <td style="text-align:center; font-weight:bold;">
+                                    <td class="text-center font-bold">
                                         <?php echo htmlspecialchars($row['group_count']); ?>
                                     </td>
-                                    <td style="white-space: nowrap;">
+                                    <td>
+                                        <?php 
+                                            $status = isset($row['payment_status']) ? $row['payment_status'] : 'Pending';
+                                            $statusClass = ($status == 'Berjaya') ? 'status-success' : 'status-pending';
+                                        ?>
+                                        <span class="status-badge <?php echo $statusClass; ?>"><?php echo htmlspecialchars($status); ?></span>
+                                    </td>
+                                    <td class="text-center">
                                         <a href="view_peserta.php?id=<?php echo $row['id']; ?>&source=group" class="btn-action btn-view" title="Lihat"><i class="fas fa-eye"></i></a>
                                         <a href="edit_peserta.php?id=<?php echo $row['id']; ?>&source=group" class="btn-action btn-edit" title="Edit"><i class="fas fa-edit"></i></a>
                                         <a href="print_receipt.php?id=<?php echo $row['id']; ?>&source=group" target="_blank" class="btn-action btn-print" title="Cetak Resit"><i class="fas fa-file-pdf"></i></a>
@@ -85,7 +93,7 @@ $result = $conn->query($sql);
                                 <?php endwhile; ?>
                             <?php else: ?>
                                 <tr>
-                                    <td colspan="7" style="text-align:center;">Tiada rekod dijumpai.</td>
+                                    <td colspan="7" class="text-center">Tiada rekod dijumpai.</td>
                                 </tr>
                             <?php endif; ?>
                         </tbody>

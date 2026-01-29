@@ -2,11 +2,13 @@
 include 'db_connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // 1. Handle File Upload (One receipt for the whole group)
+    // 1. Handle Payment Proof (Text Input or File)
     $payment_proof = "";
     $payment_method = $_POST['payment_method'];
 
-    if (isset($_FILES['payment_receipt']) && $_FILES['payment_receipt']['error'] == 0) {
+    if (isset($_POST['payment_ref']) && !empty($_POST['payment_ref'])) {
+        $payment_proof = trim($_POST['payment_ref']);
+    } elseif (isset($_FILES['payment_receipt']) && $_FILES['payment_receipt']['error'] == 0) {
         $target_dir = "uploads/";
         if (!file_exists($target_dir)) {
             mkdir($target_dir, 0777, true);
@@ -25,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['participants']) && is_array($_POST['participants'])) {
         $participants = $_POST['participants'];
         
-        $stmt = $conn->prepare("INSERT INTO group_participants (nama_penuh, ic_number, jantina, umur, race, agama, no_telefon, nama_sekolah, distance, tshirt_size, tshirt_type, ec_name, ec_number, payment_method, payment_proof) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO group_participants (nama_penuh, ic_number, jantina, umur, race, agama, no_telefon, nama_sekolah, kod_sekolah, distance, tshirt_size, tshirt_type, ec_name, ec_number, payment_method, payment_proof) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
         foreach ($participants as $p) {
             $nama_penuh = strtoupper(trim($p['name']));
@@ -36,6 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $race = $p['race'];
             $agama = $p['religion'];
             $nama_sekolah = isset($p['school']) ? trim($p['school']) : '';
+            $kod_sekolah = isset($p['school_code']) ? trim($p['school_code']) : '';
             $distance = $p['distance'];
             $ec_name = trim($p['ec_name']);
             $ec_number = trim($p['ec_phone']);
@@ -67,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
 
             // Bind and Execute
-            $stmt->bind_param("sssisssssssssss", 
+            $stmt->bind_param("sssisssssssssssss", 
                 $nama_penuh, 
                 $ic_number, 
                 $jantina, 
@@ -76,13 +79,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $agama, 
                 $no_telefon, 
                 $nama_sekolah,
+                $kod_sekolah,
                 $distance, 
                 $tshirt_size, 
                 $tshirt_type, 
                 $ec_name, 
                 $ec_number, 
                 $payment_method, 
-                $payment_proof
+                $payment_proof,
+                $payment_status
             );
             
             $stmt->execute();

@@ -82,41 +82,30 @@
                 </div>
             </div>
 
-            <!-- Telegram Group -->
-            <div class="form-section">
-                <h3><i class="fab fa-telegram"></i> Group Telegram</h3>
-                <p style="font-weight: 600; color: #333;">SETELAH TEKAN LINK DIBAWAH, SILA PASTIKAN ANDA KEMBALI KE BORANG INI UNTUK TEKAN SUBMIT, SEMUA INFO AKAN DIMAKLUMKAN DALAM GROUP TELEGRAM TANGKAK RUN FOR PEACE 2026</p>
-                <a href="https://t.me/+fiFZ_fVaLd1kNGRl" target="_blank" style="color: #0088cc; font-weight: bold; text-decoration: underline; word-break: break-all;">https://t.me/+fiFZ_fVaLd1kNGRl</a>
-                <div class="form-group" style="margin-top: 1rem;">
-                    <label class="radio-label">
-                        <input type="checkbox" name="telegram_joined" value="1" required> Done masuk
-                    </label>
-                </div>
-            </div>
+
 
             <!-- Pembayaran -->
             <div class="form-section">
                 <h3><i class="fas fa-credit-card"></i> Pembayaran Online</h3>
-                <div class="form-row">
-                    <div class="form-group half">
-                        <label>Medium Bayaran</label>
-                        <select name="payment_method" required>
-                            <option value="">- Pilih Bank / E-Wallet -</option>
-                            <option value="Maybank">Maybank</option>
-                            <option value="CIMB">CIMB Bank</option>
-                            <option value="Public Bank">Public Bank</option>
-                            <option value="RHB">RHB Bank</option>
-                            <option value="Hong Leong">Hong Leong Bank</option>
-                            <option value="AmBank">AmBank</option>
-                            <option value="Bank Islam">Bank Islam</option>
-                            <option value="TNG">Touch 'n Go eWallet</option>
-                            <option value="DuitNow">DuitNow QR</option>
-                        </select>
+
+                <div style="margin-bottom: 25px; padding: 20px; background-color: #f8fbff; border: 1px solid #e0e7ff; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <a href="https://toyyibpay.com/BAYARAN-BERKUMPULAN" target="_blank" class="submit-btn" style="display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: auto; min-width: 250px; text-decoration: none; background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); padding: 12px 25px; border-radius: 50px; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3); transition: transform 0.2s;">
+                            <i class="fas fa-external-link-alt"></i> BAYAR SEKARANG
+                        </a>
+                        <p style="margin-top: 10px; font-size: 0.9rem; color: #6b7280;">Klik butang di atas untuk membuka laman pembayaran selamat</p>
                     </div>
-                    <div class="form-group half">
-                        <label>Bukti Pembayaran (Resit)</label>
-                        <input type="file" name="payment_receipt" required accept="image/*,.pdf">
-                        <small class="form-hint">Format: JPG, PNG, PDF. Maks: 5MB</small>
+
+                    <hr style="border: 0; border-top: 1px dashed #cbd5e1; margin: 20px 0;">
+
+                    <div style="text-align: center;">
+                        <input type="hidden" name="payment_method" value="ToyyibPay">
+                        
+                        <div class="form-group" style="max-width: 400px; margin: 0 auto; text-align: left;">
+                            <label style="display: block; margin-bottom: 8px; font-weight: 500;">No. Rujukan / Reference ID <span style="color:red">*</span></label>
+                            <input type="text" name="payment_ref" required placeholder="Contoh: 89340234" class="form-control" style="padding: 12px; border: 2px solid #cbd5e1; border-radius: 8px; width: 100%; font-size: 1rem;">
+                            <small class="form-hint" style="display: block; margin-top: 5px; color: #6b7280;">Sila masukkan Nombor Rujukan yang tertera pada resit ToyyibPay anda.</small>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -261,6 +250,11 @@
                                 <div class="card-field full-width">
                                     <label>Nama Sekolah (Jika Pelajar)</label>
                                     <input type="text" name="participants[${i}][school]" class="table-input" placeholder="Nama Sekolah atau (-) jika tidak berkenaan">
+                                </div>
+
+                                <div class="card-field full-width">
+                                    <label>Kod Sekolah</label>
+                                    <input type="text" name="participants[${i}][school_code]" class="table-input" placeholder="Kod Sekolah (Jika ada)">
                                 </div>
                             </div>
                         </div>

@@ -50,12 +50,102 @@ body {
     margin-bottom: 10px;
 }
 
-.sidebar-header h4 {
+/* Utility Classes */
+.sidebar-title {
     margin: 10px 0 0;
     font-weight: 600;
     letter-spacing: 1px;
     font-size: 1.1rem;
 }
+
+.flex-grow {
+    flex: 1;
+}
+
+.mr-2 {
+    margin-right: 10px;
+}
+
+.mt-1 {
+    margin-top: 5px;
+}
+
+.mt-2 {
+    margin-top: 10px;
+}
+
+.mt-3 {
+    margin-top: 15px;
+}
+
+.mt-4 {
+    margin-top: 20px;
+}
+
+.mt-5 {
+    margin-top: 30px;
+}
+
+.mb-3 {
+    margin-bottom: 15px;
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-muted {
+    color: #6c757d;
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.card-title {
+    margin-bottom: 20px;
+    color: var(--primary-color);
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.arrow-icon {
+    margin-left: auto;
+    color: #ccc;
+}
+
+.section-header {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.section-header:first-of-type {
+    margin-top: 0;
+}
+
+/* Dashboard Stats Grid Refinement */
+.dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 576px) {
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+    }
+}
+
 
 .sidebar-menu {
     list-style: none;
@@ -120,13 +210,7 @@ body {
     white-space: nowrap;
 }
 
-/* Dashboard Stats Grid */
-.dashboard-stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
+
 
 /* Modern Card Design */
 .dashboard-stat-card {
@@ -654,3 +738,22 @@ tr:hover {
         text-align: center;
     }
 }
+
+/* Status Badges */
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: inline-block;
+}
+.status-success {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+.status-pending {
+    background-color: #fee2e2;
+    color: #b91c1c;
+}
+

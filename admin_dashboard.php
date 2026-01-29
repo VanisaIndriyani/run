@@ -34,7 +34,7 @@ $total = $count_indiv + $count_group;
         <nav class="sidebar">
             <div class="sidebar-header">
                 <img src="img/logo.jpg" alt="Logo" class="sidebar-logo">
-                <h4 style="margin: 10px 0 0;">Admin Panel</h4>
+                <h4 class="sidebar-title">Admin Panel</h4>
             </div>
             <ul class="sidebar-menu">
                 <li><a href="admin_dashboard.php" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
@@ -50,12 +50,12 @@ $total = $count_indiv + $count_group;
                 <button class="menu-toggle"><i class="fas fa-bars"></i></button>
                 <div>
                     <h2 class="content-title">Dashboard Overview</h2>
-                    <p style="color: #666; font-size: 0.9rem; margin-top: 5px;">Selamat Datang, <strong><?php echo $_SESSION['admin_username']; ?></strong></p>
+                    <p class="text-muted subtitle">Selamat Datang, <strong><?php echo $_SESSION['admin_username']; ?></strong></p>
                 </div>
             </div>
 
             <div class="card">
-                <h3 style="margin-bottom: 20px; color: #003366;">Statistik Pendaftaran</h3>
+                <h3 class="card-title">Statistik Pendaftaran</h3>
                 
                 <div class="dashboard-stats">
                     <!-- Total Participants -->
@@ -78,7 +78,7 @@ $total = $count_indiv + $count_group;
                             <h2><?php echo $count_indiv; ?></h2>
                             <p>Peserta Individu</p>
                         </div>
-                        <i class="fas fa-arrow-right" style="margin-left: auto; color: #ccc;"></i>
+                        <i class="fas fa-arrow-right arrow-icon"></i>
                     </a>
 
                     <!-- Group (Clickable) -->
@@ -90,7 +90,7 @@ $total = $count_indiv + $count_group;
                             <h2><?php echo $count_group; ?></h2>
                             <p>Peserta Berkelompok</p>
                         </div>
-                        <i class="fas fa-arrow-right" style="margin-left: auto; color: #ccc;"></i>
+                        <i class="fas fa-arrow-right arrow-icon"></i>
                     </a>
                 </div>
             </div>
