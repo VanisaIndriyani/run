@@ -225,9 +225,9 @@
                         <input type="hidden" name="payment_method" value="ToyyibPay">
                         
                         <div class="form-group" style="max-width: 400px; margin: 0 auto; text-align: left;">
-                            <label style="display: block; margin-bottom: 8px; font-weight: 500;">No. Rujukan / Reference ID <span style="color:red">*</span></label>
-                            <input type="text" name="payment_ref" required placeholder="Contoh: 89340234" class="form-control" style="padding: 12px; border: 2px solid #cbd5e1; border-radius: 8px; width: 100%; font-size: 1rem;">
-                            <small class="form-hint" style="display: block; margin-top: 5px; color: #6b7280;">Sila masukkan Nombor Rujukan yang tertera pada resit ToyyibPay anda.</small>
+                            <label style="display: block; margin-bottom: 8px; font-weight: 500;">Upload Bukti Pembayaran <span style="color:red">*</span></label>
+                            <input type="file" name="payment_receipt" required accept="image/*,application/pdf" class="form-control" style="padding: 12px; border: 2px solid #cbd5e1; border-radius: 8px; width: 100%; font-size: 1rem; background: #fff;">
+                            <small class="form-hint" style="display: block; margin-top: 5px; color: #6b7280;">Sila muat naik resit pembayaran anda (Gambar/PDF).</small>
                         </div>
                     </div>
                 </div>
