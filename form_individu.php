@@ -211,23 +211,23 @@
             <div class="form-section">
                 <h3><i class="fas fa-credit-card"></i> Pembayaran Online</h3>
                 
-                <div style="margin-bottom: 25px; padding: 20px; background-color: #f8fbff; border: 1px solid #e0e7ff; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
-                    <div style="text-align: center; margin-bottom: 20px;">
-                        <a href="https://toyyibpay.com/BAYARAN-TANGKAK-RUN-FOR-PEACE-2026" target="_blank" class="submit-btn" style="display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: auto; min-width: 250px; text-decoration: none; background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); padding: 12px 25px; border-radius: 50px; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3); transition: transform 0.2s;">
+                <div class="payment-card">
+                    <div class="pay-now-container">
+                        <a href="https://toyyibpay.com/BAYARAN-TANGKAK-RUN-FOR-PEACE-2026" target="_blank" class="pay-now-btn">
                             <i class="fas fa-external-link-alt"></i> BAYAR SEKARANG
                         </a>
-                        <p style="margin-top: 10px; font-size: 0.9rem; color: #6b7280;">Klik butang di atas untuk membuka laman pembayaran selamat</p>
+                        <p class="payment-instruction">Klik butang di atas untuk membuka laman pembayaran selamat</p>
                     </div>
 
-                    <hr style="border: 0; border-top: 1px dashed #cbd5e1; margin: 20px 0;">
+                    <hr class="payment-divider">
 
-                    <div style="text-align: center;">
+                    <div>
                         <input type="hidden" name="payment_method" value="ToyyibPay">
                         
-                        <div class="form-group" style="max-width: 400px; margin: 0 auto; text-align: left;">
-                            <label style="display: block; margin-bottom: 8px; font-weight: 500;">Upload Bukti Pembayaran <span style="color:red">*</span></label>
-                            <input type="file" name="payment_receipt" required accept="image/*,application/pdf" class="form-control" style="padding: 12px; border: 2px solid #cbd5e1; border-radius: 8px; width: 100%; font-size: 1rem; background: #fff;">
-                            <small class="form-hint" style="display: block; margin-top: 5px; color: #6b7280;">Sila muat naik resit pembayaran anda (Gambar/PDF).</small>
+                        <div class="form-group upload-section">
+                            <label class="upload-label">Upload Bukti Pembayaran <span style="color:red">*</span></label>
+                            <input type="file" name="payment_receipt" required accept="image/*,application/pdf" class="upload-input">
+                            <small class="upload-hint">Sila muat naik resit pembayaran anda (Gambar/PDF).</small>
                         </div>
                     </div>
                 </div>

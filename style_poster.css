@@ -658,6 +658,18 @@ body {
     
     .bottom-action-section {
         grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+    }
+    
+    .extra-details {
+        text-align: center;
+    }
+    
+    .feature-list li {
+        justify-content: center;
+        display: flex;
+        align-items: center;
     }
 
     .poster-content-grid {
